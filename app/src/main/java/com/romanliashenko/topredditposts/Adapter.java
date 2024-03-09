@@ -57,9 +57,7 @@ public class Adapter extends RecyclerView.Adapter<ViewHolder> {
                 holder.thumbnail.setImageResource(R.drawable.ic_no_image);
                 holder.thumbnail.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View v) {
-
-                    }
+                    public void onClick(View v) {}
                 });
             }
         }
