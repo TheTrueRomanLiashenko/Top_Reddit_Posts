@@ -69,8 +69,7 @@
             android:layout_width="30sp"
             android:layout_height="30sp"
             android:layout_below="@id/imageView2"
-            android:layout_alignTop="@id/timer_ic_drawable"
-            android:layout_toLeftOf="@id/comments_counter_text"
+            android:layout_toStartOf="@id/comments_counter_text"
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_comment_counter" />
 
@@ -86,18 +85,5 @@
             android:text="CommentsCounter"
             android:textSize="12sp" />
     </RelativeLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:orientation="horizontal"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2">
-
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
