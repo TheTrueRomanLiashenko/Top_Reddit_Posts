@@ -38,12 +38,18 @@ public class Adapter extends RecyclerView.Adapter<ViewHolder> {
         holder.timerText.setText(timerTextTemp);
         holder.commentCounterText.setText(String.valueOf(publications.get(position).getNum_comments()));
 
-        try {
-            InputStream inputStream = (InputStream) new URL(publications.get(position).getThumbnail()).getContent();
-            Drawable drawable = Drawable.createFromStream(inputStream, "thumbnail");
-            holder.thumbnail.setImageDrawable(drawable);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (!publications.get(position).getThumbnail().contains("default") || !publications.get(position).getThumbnail().contains("https://external-preview.redd.it")) {
+            try {
+                InputStream inputStream = (InputStream) new URL(publications.get(position).getThumbnail()).getContent();
+                Drawable drawable = Drawable.createFromStream(inputStream, "thumbnail1");
+                holder.thumbnail.setImageDrawable(drawable);
+            } catch (IOException e) {
+                System.out.println("ERROR: Publication #" + position);
+                holder.thumbnail.setImageResource(R.drawable.ic_no_image);
+            }
+        }
+        else {
+            System.out.println("ERROR: Publication #" + position + " contains \"default\" or https://external-preview.redd.it");
         }
     }
 
