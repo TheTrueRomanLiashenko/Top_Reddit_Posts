@@ -1,8 +1,11 @@
 package com.romanliashenko.topredditposts;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -43,14 +46,32 @@ public class Adapter extends RecyclerView.Adapter<ViewHolder> {
                 InputStream inputStream = (InputStream) new URL(publications.get(position).getThumbnail()).getContent();
                 Drawable drawable = Drawable.createFromStream(inputStream, "thumbnail1");
                 holder.thumbnail.setImageDrawable(drawable);
+                holder.thumbnail.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        goToImageURL(publications.get(position).getThumbnail());
+                    }
+                });
             } catch (IOException e) {
                 System.out.println("ERROR: Publication #" + position);
                 holder.thumbnail.setImageResource(R.drawable.ic_no_image);
+                holder.thumbnail.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
             }
         }
         else {
             System.out.println("ERROR: Publication #" + position + " contains \"default\" or https://external-preview.redd.it");
         }
+    }
+
+    private void goToImageURL(String thumbnailUrl) {
+        Intent openImageUrl = new Intent(Intent.ACTION_VIEW, Uri.parse(thumbnailUrl));
+        openImageUrl.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(openImageUrl);
     }
 
     @Override
