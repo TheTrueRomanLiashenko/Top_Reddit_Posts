@@ -44,7 +44,6 @@ public class Adapter extends RecyclerView.Adapter<ViewHolder> {
             holder.thumbnail.setImageDrawable(drawable);
         } catch (IOException e) {
             e.printStackTrace();
-            throw new RuntimeException(e);
         }
     }
 

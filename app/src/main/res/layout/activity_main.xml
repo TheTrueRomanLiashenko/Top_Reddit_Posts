@@ -20,15 +20,9 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="343dp"
-            android:contentDescription="imageView"
-            android:onClick="goToImageUrl"
-            app:srcCompat="@drawable/ic_launcher_foreground" />
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,13 +6,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
-import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,7 +22,6 @@ import com.romanliashenko.topredditposts.model.RedditPost;
 import com.romanliashenko.topredditposts.model.RedditResponse;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,7 +29,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     //ArrayList with all the Reddit Publications
-    ArrayList<Publication> publications = new ArrayList<>();
+    List<Publication> publications = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,11 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         readPublications();
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new Adapter(getApplicationContext(), publications));
     }
 
     public void readPublications() {
@@ -82,18 +86,6 @@ public class MainActivity extends AppCompatActivity {
             System.out.println(result);
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
-
-    //TODO change this method to set given URL to given View element
-    private void setImage(View view) {
-        try {
-            InputStream is = (InputStream) new URL("https://b.thumbs.redditmedia.com/v_82-Thy85ThGWSqPHUxETX1yWCL11P3hofnXaMakzU.jpg").getContent();
-            Drawable d = Drawable.createFromStream(is, "thumbnail");
-//            ImageView imageView = (ImageView) findViewById(R.id.imageView);
-//            imageView.setImageDrawable(d);
-        } catch (Exception e) {
-
         }
     }
 
