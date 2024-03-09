@@ -19,10 +19,43 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="55sp"
+            android:layout_alignParentTop="true"
+            android:padding="16dp">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/reddit_logo"
+            android:layout_width="45sp"
+            android:layout_height="45sp"
+            android:layout_alignTop="@id/header"
+            android:layout_alignBottom="@id/header"
+            android:layout_marginLeft="20sp"
+            android:src="@drawable/reddit_logo256x256" />
+
+        <TextView
+            android:id="@+id/topRedditPosts_text"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:layout_alignTop="@id/header"
+            android:layout_alignBottom="@id/header"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="10sp"
+            android:layout_toEndOf="@id/reddit_logo"
+            android:gravity="center"
+            android:text="Top Reddit Posts!"
+            android:textColor="@color/black90"
+            android:textSize="25sp" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_below="@id/header" />
 
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
