@@ -1,10 +1,12 @@
 package com.romanliashenko.topredditposts;
 
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,17 +21,16 @@ import com.romanliashenko.topredditposts.model.RedditPost;
 import com.romanliashenko.topredditposts.model.RedditResponse;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    //ArrayList with all the Reddit Publications
+    ArrayList<Publication> publications = new ArrayList<>();
 
-    private TextView textView;
-    private Button button;
-
-    List<Publication> publications = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,12 +41,10 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-        textView = findViewById(R.id.textView);
-        button = findViewById(R.id.button);
+        readPublications();
     }
 
-    public void readPublications(View v) {
+    public void readPublications() {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
@@ -80,9 +79,29 @@ public class MainActivity extends AppCompatActivity {
                         .append((date.getTime() / 1000f - postDate.getTime()) / 3600f)
                         .append(" hours ago. \n\n");
             }
-            textView.setText(result);
+            System.out.println(result);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    //TODO change this method to set given URL to given View element
+    private void setImage(View view) {
+        try {
+            InputStream is = (InputStream) new URL("https://b.thumbs.redditmedia.com/v_82-Thy85ThGWSqPHUxETX1yWCL11P3hofnXaMakzU.jpg").getContent();
+            Drawable d = Drawable.createFromStream(is, "thumbnail");
+//            ImageView imageView = (ImageView) findViewById(R.id.imageView);
+//            imageView.setImageDrawable(d);
+        } catch (Exception e) {
+
+        }
+    }
+
+    //TODO change this method to open URL in web
+    public void goToImageUrl(View view) {
+        String url = "https://b.thumbs.redditmedia.com/v_82-Thy85ThGWSqPHUxETX1yWCL11P3hofnXaMakzU.jpg";
+        Uri uriUrl = Uri.parse(url);
+        Intent openImageUrl = new Intent(Intent.ACTION_VIEW, uriUrl);
+        startActivity(openImageUrl);
     }
 }
