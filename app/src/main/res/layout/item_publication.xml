@@ -17,7 +17,7 @@
             android:id="@+id/author_avatar_ic_drawable"
             android:layout_width="40sp"
             android:layout_height="40sp"
-            android:layout_marginStart="50sp"
+            android:layout_marginStart="40sp"
             android:layout_marginBottom="10sp"
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_author_avatar" />
@@ -102,9 +102,11 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/thumbnail"
             android:layout_alignTop="@id/comments_counter_ic_drawable"
+            android:layout_alignBottom="@id/comments_counter_ic_drawable"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="70sp"
             android:fontFamily="@font/montserrat_medium_ttf"
+            android:gravity="center_vertical"
             android:text="CommentsCounter"
             android:textSize="14sp" />
 
@@ -129,7 +131,7 @@
             android:layout_alignTop="@id/author_avatar_ic_drawable"
             android:layout_alignBottom="@id/author_avatar_ic_drawable"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="50sp"
+            android:layout_marginEnd="40sp"
             android:background="@android:color/transparent"
             android:contentDescription="more_button"
             android:cropToPadding="false"
