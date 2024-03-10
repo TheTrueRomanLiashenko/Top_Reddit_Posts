@@ -1,6 +1,7 @@
 package com.romanliashenko.topredditposts;
 
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ViewHolder extends RecyclerView.ViewHolder {
     ImageView thumbnail, authorAvatar, timer, commentCounter;
     TextView authorText, timerText, commentCounterText;
+    ImageButton buttonMore;
     public ViewHolder(@NonNull View itemView) {
         super(itemView);
 
@@ -21,5 +23,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         authorText = itemView.findViewById(R.id.author_name_text);
         timerText = itemView.findViewById(R.id.timer_text);
         commentCounterText = itemView.findViewById(R.id.comments_counter_text);
+
+        buttonMore = itemView.findViewById(R.id.buttonMore);
     }
 }

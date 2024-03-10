@@ -1,11 +1,12 @@
 package com.romanliashenko.topredditposts;
 
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -89,11 +90,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //TODO change this method to open URL in web
-    public void goToImageUrl(View view) {
-        String url = "https://b.thumbs.redditmedia.com/v_82-Thy85ThGWSqPHUxETX1yWCL11P3hofnXaMakzU.jpg";
-        Uri uriUrl = Uri.parse(url);
-        Intent openImageUrl = new Intent(Intent.ACTION_VIEW, uriUrl);
-        startActivity(openImageUrl);
-    }
 }
