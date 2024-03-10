@@ -8,8 +8,8 @@
     tools:context=".MainActivity">
 
     <RelativeLayout
-        android:layout_width="409dp"
-        android:layout_height="657dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
@@ -22,7 +22,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/header"
             android:layout_width="match_parent"
-            android:layout_height="55sp"
+            android:layout_height="60sp"
             android:layout_alignParentTop="true"
             android:padding="16dp">
 
@@ -47,7 +47,7 @@
             android:layout_marginStart="10sp"
             android:layout_toEndOf="@id/reddit_logo"
             android:gravity="center"
-            android:text="Top Reddit Posts!"
+            android:text="@string/header_text"
             android:textColor="@color/black90"
             android:textSize="25sp" />
 

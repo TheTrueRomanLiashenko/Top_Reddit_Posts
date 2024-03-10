@@ -1,14 +1,11 @@
 package com.romanliashenko.topredditposts;
 
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.os.StrictMode;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageButton;
-import android.widget.PopupMenu;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -90,4 +87,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
+        //We can save any information using this method in case if activity will be destroyed
+        outState.putString("SomeKey", "SomeValue");
+        super.onSaveInstanceState(outState, outPersistentState);
+    }
 }

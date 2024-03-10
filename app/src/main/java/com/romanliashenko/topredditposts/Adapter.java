@@ -43,7 +43,7 @@ public class Adapter extends RecyclerView.Adapter<ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.authorText.setText(publications.get(position).getAuthor());
-        String timerTextTemp = Math.round((new Date().getTime()/1000f - publications.get(position).getCreated_utc())/3600f)+ " hors ago";
+        String timerTextTemp = Math.round((new Date().getTime()/1000f - publications.get(position).getCreated_utc())/3600f)+ " hours ago";
         holder.timerText.setText(timerTextTemp);
         holder.commentCounterText.setText(String.valueOf(publications.get(position).getNum_comments()));
 

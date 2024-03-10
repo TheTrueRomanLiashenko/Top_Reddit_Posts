@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Top Reddit Posts</string>
+    <string name="header_text">Top Reddit Posts!</string>
 </resources>
