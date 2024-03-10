@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -47,6 +46,12 @@ public class Adapter extends RecyclerView.Adapter<ViewHolder> {
         holder.timerText.setText(timerTextTemp);
         holder.commentCounterText.setText(String.valueOf(publications.get(position).getNum_comments()));
 
+        /*
+        * Some thumbnails links may not work (have no idea why), so we check for those bad URLs
+        * before assigning them to ImageView elements and opening them in web to avoid app crash.
+        * If URL doesn't work, then default "no image" icon will be placed instead of thumbnail.
+        * Also, we don't implement onClickListener for them so web page won't be opened.
+        */
         if (!publications.get(position).getThumbnail().contains("default") || !publications.get(position).getThumbnail().contains("https://external-preview.redd.it")) {
             try {
                 InputStream inputStream = (InputStream) new URL(publications.get(position).getThumbnail()).getContent();
@@ -59,18 +64,19 @@ public class Adapter extends RecyclerView.Adapter<ViewHolder> {
                     }
                 });
             } catch (IOException e) {
-                System.out.println("ERROR: Publication #" + position);
+                System.out.println("ERROR: Publication #" + position + "has broken URL: " + publications.get(position).getThumbnail());
                 holder.thumbnail.setImageResource(R.drawable.ic_no_image);
-                holder.thumbnail.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {}
-                });
             }
         }
         else {
             System.out.println("ERROR: Publication #" + position + " contains \"default\" or https://external-preview.redd.it");
         }
 
+        /*
+        * This onClick listener is here for "More" ImageButton. When button is clicked, popup menu
+        * appears. For now it ahs only 1 item: "Download thumbnail to gallery", which, obviously,
+        * downloads a thumbnail =)
+        */
         holder.buttonMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,6 +102,9 @@ public class Adapter extends RecyclerView.Adapter<ViewHolder> {
         });
     }
 
+    /*
+    * Downloads any Thumbnail to the gallery using given URL.
+    */
     private boolean downloadThumbnailToGallery(String thumbnailUrl) {
         try {
             InputStream inputStream = (InputStream) new URL(thumbnailUrl).getContent();
@@ -109,6 +118,9 @@ public class Adapter extends RecyclerView.Adapter<ViewHolder> {
         }
     }
 
+    /*
+    * Opens an image in a web using given URL.
+    */
     private void goToImageURL(String thumbnailUrl) {
         Intent openImageUrl = new Intent(Intent.ACTION_VIEW, Uri.parse(thumbnailUrl));
         openImageUrl.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

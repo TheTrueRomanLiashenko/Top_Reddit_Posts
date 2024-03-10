@@ -26,7 +26,7 @@ import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    //ArrayList with all the Reddit Publications
+    //ArrayList with all the Reddit Top Publications
     List<Publication> publications = new ArrayList<>();
 
     @Override
@@ -47,14 +47,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void readPublications() {
+        //Changing ThreadPolicy is needed in order to have access to network and storage
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
+        //Creating ObjectMapper instance from Jackson library
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         try {
-            //Here we read data from https://www.reddit.com/top.json and extract needed one
-            //using Jackson library to Publication objects.
+            /*
+            * Here we read data from https://www.reddit.com/top.json and extract needed one
+            * using Jackson library to Publication objects.
+            */
             RedditResponse response = mapper.readValue(new URL("https://www.reddit.com/top.json"),
                     RedditResponse.class);
             List<RedditPost> redditPosts = response.getData().getChildren();
@@ -69,27 +73,18 @@ public class MainActivity extends AppCompatActivity {
                 );
                 publications.add(publication);
             }
-
-            //Just some testing. Will be deleted soon.
-            Date date;
-            StringBuilder result = new StringBuilder();
-            for (Publication publication : publications) {
-                date = new Date();
-                Date postDate = new Date(publication.getCreated_utc());
-                result.append(publication.toString()).append('\n');
-                result.append("Publication was made ")
-                        .append((date.getTime() / 1000f - postDate.getTime()) / 3600f)
-                        .append(" hours ago. \n\n");
-            }
-            System.out.println(result);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    /*
+     * We can save any information using this method in case if activity will be destroyed.
+     * Currently we don't need it, but if this project will be modified with extra activities
+     * it won't be hard to implement state saving
+     */
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
-        //We can save any information using this method in case if activity will be destroyed
         outState.putString("SomeKey", "SomeValue");
         super.onSaveInstanceState(outState, outPersistentState);
     }
