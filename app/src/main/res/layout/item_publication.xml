@@ -69,13 +69,15 @@
 
         <TextView
             android:id="@+id/timer_text"
-            android:layout_width="60sp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/author_name_text"
             android:layout_alignTop="@id/timer_ic_drawable"
+            android:layout_alignBottom="@id/timer_ic_drawable"
             android:layout_toEndOf="@id/timer_ic_drawable"
             android:layout_weight="1"
             android:fontFamily="@font/montserrat_medium_ttf"
+            android:gravity="center_vertical"
             android:text="TimerText"
             android:textSize="14sp" />
 
