@@ -17,9 +17,6 @@
         android:theme="@style/Theme.TopRedditPosts"
         tools:targetApi="31">
         <activity
-            android:name=".ItemPublicationActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
